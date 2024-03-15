@@ -28,4 +28,4 @@ def pr_tag(request):
     if person_name and tag and genre and price and discount:
         new_tag = Product.objects.create(person_name=person_name,price=price,discount=discount, tag=tag, genre=genre)
         new_tag.save()
-    return render(request,'index.html')
+    return render(request,'index.html') 
