@@ -15,7 +15,7 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'pr:logout' %}">Logout</a>
+            
           </li>
         </ul>
         <form class="d-flex" method='POST' action="{% url 'pr:search_results' %}">
@@ -30,11 +30,16 @@
 <p></p>
 <p></p>
 <div>
+  {% if request.session.is_login %}
+    <a class="nav-link" href="{% url 'pr:logout' %}">Logout</a>
+  {% else %}
   <form method="POST" action="{% url 'pr:login_test'%}">
     {% csrf_token %}
     <input type='text' name='username' placeholder='username'>
     <button class="btn btn-outline-success" type="submit">로그인</button>
   </form>
+{% endif %}
+  
 </div> 
 <p></p>
 <p></p>

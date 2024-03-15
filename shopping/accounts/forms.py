@@ -15,7 +15,6 @@ class SignupForm(forms.Form):
     person_name = forms.CharField(label='이름')
     phone_number = forms.CharField(label='전화번호')
     address = forms.CharField(label='주소', widget=forms.TextInput(),)
-    role = forms.ChoiceField(choices=User.ROLES, widget=forms.RadioSelect)
     
     # 아이디 유효성 검사
     def clean_username(self):
@@ -66,6 +65,10 @@ class SignupForm(forms.Form):
             raise ValidationError("전화번호는 11자리여야 합니다.")
         
         return phone_number
+    
+    class Meta:
+        model = User
+        fields = ['username', 'password', 'person_name', 'phone_number', 'address']
     
 # 아이디 찾기
 class FindForm(forms.ModelForm):

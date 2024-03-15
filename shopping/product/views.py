@@ -18,7 +18,7 @@ def login_test(request):
         #user = authenticate(username=username)
         if user is not None:
             request.session['username'] = username
-            request.session['is_login'] = username
+            request.session['is_login'] = 'True'
             login(request, user)
             print('로그인 완료')
             return render(request, 'index.html')

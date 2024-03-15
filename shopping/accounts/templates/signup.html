@@ -29,7 +29,7 @@
 <div>
   <form method="POST" action="{% url 'ac:signup_submit'%}">                          
     {% csrf_token %}
-    <input type='text' name='id' placeholder='id'>           
+    <input type='text' name='username' placeholder='id'>           
     <input type='password' name='password' placeholder='password'>
     <input type='text' name='person_name' placeholder='person_name'>
     <input type='text' name='phone_number' placeholder='phone_number'>
@@ -43,6 +43,7 @@
     <button class="btn btn-outline-success" type="submit">로그인 화면으로</button>
   </form>
 </div>
+
 <br>
 
 </body>
