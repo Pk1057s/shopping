@@ -8,7 +8,7 @@ class User(AbstractUser):
         ('vip', 'vip'),
         ('customer', '소비자')
     )
-    role = models.CharField(max_length=10, choices=ROLES, default='worker')
+    role = models.CharField(max_length=10, choices=ROLES, default='customer')
     person_name = models.CharField(max_length=20, blank=False, null=True, verbose_name='이름')
     phone_number = models.CharField(max_length=15, blank=False, null=True, verbose_name='전화번호')
     address = models.CharField(max_length=100, blank=False, null=True, verbose_name='주소')
