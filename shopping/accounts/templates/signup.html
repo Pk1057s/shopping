@@ -18,11 +18,7 @@
             <a class="nav-link" href="#">Link</a>
           </li>
         </ul>
-        <form class="d-flex" method='GET' action="{% url 'ac:login_search' %}">
-          {% csrf_token %}
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name='Search'>
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        
       </div>
     </div>
 </nav>
@@ -31,17 +27,20 @@
 <p></p>
 <h2>회원가입</h2>
 <div>
-  <form method="POST" action="{% url 'ac:login_view'%}">                          
+  <form method="POST" action="{% url 'ac:signup_submit'%}">                          
     {% csrf_token %}
     <input type='text' name='id' placeholder='id'>           
-    <input type='password' name='password' placeholder=''>
+    <input type='password' name='password' placeholder='password'>
+    <input type='text' name='person_name' placeholder='person_name'>
+    <input type='text' name='phone_number' placeholder='phone_number'>
+    <input type='text' name='address' placeholder='address'>
     <button class="btn btn-outline-success" type="submit">Log In</button>
   </form>
 </div>
 <div>
-  <form method="POST" action="{% url 'ac:signup_view'%}">                          
+  <form method="POST" action="{% url 'ac:login_view'%}">                          
     {% csrf_token %}
-    <button class="btn btn-outline-success" type="submit">회원가입</button>
+    <button class="btn btn-outline-success" type="submit">로그인 화면으로</button>
   </form>
 </div>
 <br>

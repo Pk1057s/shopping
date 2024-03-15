@@ -11,11 +11,10 @@ class LoginForm(forms.Form):
 # 회원가입
 class SignupForm(forms.Form):
     username = forms.CharField()
-    password1 = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput)
     person_name = forms.CharField(label='이름')
     phone_number = forms.CharField(label='전화번호')
-    company = forms.CharField(label='회사', widget=forms.TextInput(),)
+    address = forms.CharField(label='주소', widget=forms.TextInput(),)
     role = forms.ChoiceField(choices=User.ROLES, widget=forms.RadioSelect)
     
     # 아이디 유효성 검사

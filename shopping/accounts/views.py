@@ -1,14 +1,57 @@
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.decorators.csrf import csrf_exempt
+from accounts.models import User
+from accounts.forms import LoginForm, SignupForm
+from django.urls import reverse
 
-def login_view(response):
+def login_view(request):
 
-    return render(response, "login.html")
+    return render(request, "login.html")
 
-def login_search(response):
+def login_submit(request):
+    if request.method == "POST":
+        form = LoginForm(data=request.POST)
+        print(form)
+        username = form.cleaned_data["username"]
+        password = form.cleaned_data["password"]
+        # print(username)
+        # print(role)
+        info =f", {username}, {password}"
+        # 해당하는 사용자가 있는지 확인
+        is_auth = authenticate(username=username, password=password)
+        
+        # 사용자가 존재하면 로그인 후 메인페이지로 이동
+        if is_auth:
+            login(request, is_auth)
+            message = "success" + info
+            return redirect(reverse("login.html"), {'message':message})
+        # 없으면 로그인 실패 문구 출력
+        else:
+            message = "fail" + info
+            return render(request, 'login.html', {'message':message})
 
-    return render(response, "login.html")
+def login_search(request):
+    
+    return render(request, "login.html")
 
-def signup_view(response):
+def signup_view(request):
 
-    return render(response, "signup.html")
+    return render(request, "signup.html")
+
+def signup_submit(request):
+    if request.method == "POST":
+        form = SignupForm(data=request.POST)
+        
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        person_name = form.cleaned_data['person_name']
+        phone_number = form.cleaned_data['phone_number']
+        address = form.cleaned_data['address']
+
+        user = User.objects.create_user(username=username, password=password, role='admin', person_name=person_name, phone_number=phone_number, address=address)
+        login(request, user)
+        message = f"{username} is signedup"
+        return redirect(reverse("login.html"), {'message':message})
+    else :
+        return render(request, "signup.html")
