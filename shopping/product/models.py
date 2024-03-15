@@ -6,7 +6,7 @@ class Tag(models.Model):
     genre = models.CharField(max_length=100)
     def __str__(self):
         return self.person_name
-
+ 
 class Product(models.Model):
     product_name = models.CharField(max_length=150)
     price = models.IntegerField()
