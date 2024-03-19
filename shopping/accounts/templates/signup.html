@@ -25,7 +25,11 @@
 <p></p>
 <p></p>
 <p></p>
-<div class="container text-left">
+<div class="container text-left" style="margin-top: 100px;">
+  <h1 class="display-5" style="margin-left: 40px;">Sign Up</h1>    
+  <p></p>
+  <p></p>
+  <p></p>
   <div class="row">
     <div class="col-md-1">      
     </div>
@@ -34,24 +38,33 @@
       <form method="POST" action="{% url 'ac:signup_submit'%}">
         {% csrf_token %}
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">User Name</label>
-          <input type="text" class="form-control" name='username' aria-describedby="LogInHelp">
-          <div id="LogInHelp" class="form-text">테스트</div>
+          <label for="usernameInput" class="form-label">User Name</label>
+          <input type="text" class="form-control" name='username'>
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" name='password'>
+          <label for="password1Input" class="form-label">Password</label>
+          <input type="password" class="form-control" name='password' aria-describedby="PasswordHelp">
+          <div id="PasswordHelp" class="form-text">비밀번호는 최소 8자리 이상이어야 하며, 대소문자, 특수문자, 숫자 중 최소 3종류 이상을 포함해야 합니다.</div>
         </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">자동 로그인</label>
+        <div class="mb-3">
+          <label for="personNameInput" class="form-label">Your Name</label>
+          <input type="text" class="form-control" name='person_name'>
         </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
+        <div class="mb-3">
+          <label for="phoneNumberInput" class="form-label">Phone Number</label>
+          <input type="text" class="form-control" name='phone_number' aria-describedby="PhoneNumberHelp">
+          <div id="PhoneNumberHelp" class="form-text">전화번호는 11자리, 숫자만 포함해야 합니다.</div>
+        </div>
+        <div class="mb-3">
+          <label for="addressInput" class="form-label">Address</label>
+          <input type="text" class="form-control" name='address'>
+        </div>
+        <button class="btn btn-primary" type="submit" style="margin-top: 100px;">회원 가입</button>
       </form>
       <div>
-        <form method="POST" action="{% url 'ac:signup_view'%}">                          
+        <form method="POST" action="{% url 'ac:login_view'%}">                          
           {% csrf_token %}
-          <button class="btn btn-primary" type="submit">회원가입</button>
+          <button class="btn btn-outline-success" type="submit" style="margin-top: 20px;">로그인 화면으로</button>
         </form>
       </div>
 
@@ -61,29 +74,7 @@
     </div>
   </div>
 </div>
-
-
-
-<h2>회원가입</h2>
-<div>
-  <form method="POST" action="{% url 'ac:signup_submit'%}">                          
-    {% csrf_token %}
-    <input type='text' name='username' placeholder='id'>           
-    <input type='password' name='password' placeholder='password'>
-    <input type='text' name='person_name' placeholder='person_name'>
-    <input type='text' name='phone_number' placeholder='phone_number'>
-    <input type='text' name='address' placeholder='address'>
-    <button class="btn btn-outline-success" type="submit">Sing Up</button>
-  </form>
-</div>
 {{errorMessage}}
-<div>
-  <form method="POST" action="{% url 'ac:login_view'%}">                          
-    {% csrf_token %}
-    <button class="btn btn-outline-success" type="submit">로그인 화면으로</button>
-  </form>
-</div>
-
 <br>
 
 </body>
