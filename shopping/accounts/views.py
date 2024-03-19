@@ -49,7 +49,8 @@ def signup_submit(request):
             person_name = form.cleaned_data['person_name']
             phone_number = form.cleaned_data['phone_number']
             address = form.cleaned_data['address']
-
+        else:
+            return HttpResponse(form)
         user = User.objects.create_user(username=username, password=password, role='admin', person_name=person_name, phone_number=phone_number, address=address)
         login(request, user)
         message = f"{username} is signedup"
