@@ -50,9 +50,9 @@ def signup_submit(request):
             phone_number = form.cleaned_data['phone_number']
             address = form.cleaned_data['address']
 
-        user = User.objects.create_user(username=username, password=password, role='admin', person_name=person_name, phone_number=phone_number, address=address)
-        login(request, user)
-        message = f"{username} is signedup"
-        return render(request,'login.html', {'message':message})
-    else :
-        return render(request, "signup.html")
+            user = User.objects.create_user(username=username, password=password, role='admin', person_name=person_name, phone_number=phone_number, address=address)
+            login(request, user)
+            message = f"{username} is signedup"
+            return render(request,'login.html', {'message':message})
+        else :
+            return render(request, "signup.html")

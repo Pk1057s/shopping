@@ -24,7 +24,45 @@
 <p></p>
 <p></p>
 <p></p>
-<h2>로그인</h2>
+<div class="container text-left">
+  <div class="row">
+    <div class="col-md-1">      
+    </div>
+
+    <div class="col-md-4">
+      <form method="POST" action="{% url 'ac:login_submit'%}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">User Name</label>
+          <input type="text" class="form-control" name='username' aria-describedby="LogInHelp">
+          <div id="LogInHelp" class="form-text">테스트</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" name='password'>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">자동 로그인</label>
+        </div>
+        <button type="submit" class="btn btn-primary">로그인</button>
+      </form>
+      <div>
+        <form method="POST" action="{% url 'ac:signup_view'%}">                          
+          {% csrf_token %}
+          <button class="btn btn-primary" type="submit">회원가입</button>
+        </form>
+      </div>
+
+    </div>
+    <div class="col-md-9">
+      
+    </div>
+  </div>
+</div>
+
+
+{% comment %} <h2>로그인</h2>
 <div>
   <form method="POST" action="{% url 'ac:login_submit'%}">                          
     {% csrf_token %}
@@ -32,15 +70,15 @@
     <input type='password' name='password' placeholder=''>
     <button class="btn btn-outline-success" type="submit">Log In</button>
   </form>
-</div>
+</div> {% endcomment %}
 {{message}}
-<div>
+{% comment %} <div>
   <form method="POST" action="{% url 'ac:signup_view'%}">                          
     {% csrf_token %}
     <button class="btn btn-outline-success" type="submit">회원가입</button>
   </form>
 </div>
-<br>
+<br> {% endcomment %}
 
 </body>
 

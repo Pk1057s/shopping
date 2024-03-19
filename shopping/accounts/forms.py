@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from accounts.models import User
 
+
 # 로그인
 class LoginForm(forms.Form):
     username = forms.CharField(min_length=1, label='아이디', widget=forms.TextInput(),)
@@ -9,7 +10,8 @@ class LoginForm(forms.Form):
     role = forms.ChoiceField(choices=User.ROLES, widget=forms.RadioSelect())
     
 # 회원가입
-class SignupForm(forms.Form):
+class SignupForm(forms.Form):   
+
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
     person_name = forms.CharField(label='이름')
@@ -24,27 +26,27 @@ class SignupForm(forms.Form):
         return username
     
     # 비밀번호 유효성 검사
-    def clean_password1(self):
-        password1 = self.cleaned_data.get("password1")
+    def clean_password(self):
+        password = self.cleaned_data.get("password")
         
         # 비밀번호 길이가 8자 이상인지 확인
-        if len(password1) < 8:
+        if len(password) < 8:
             raise forms.ValidationError("비밀번호는 최소 8자리 이상이어야 합니다.")
 
         # 대소문자, 특수문자, 숫자 중 최소 2종류 이상을 포함하는지 확인
         char_types = 0
-        if any(char.isupper() for char in password1):
+        if any(char.isupper() for char in password):
             char_types += 1
-        if any(char.islower() for char in password1):
+        if any(char.islower() for char in password):
             char_types += 1
-        if any(char.isdigit() for char in password1):
+        if any(char.isdigit() for char in password):
             char_types += 1
-        if any(char.isascii() and not char.isalnum() for char in password1):
+        if any(char.isascii() and not char.isalnum() for char in password):
             char_types += 1
 
         if char_types < 3:
             raise forms.ValidationError("비밀번호는 대소문자, 특수문자, 숫자 중 최소 3종류 이상을 포함해야 합니다.")
-        return password1
+        return password
         
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
