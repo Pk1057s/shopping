@@ -52,7 +52,7 @@
         <button type="submit" class="btn btn-primary" style="margin-top: 100px;">로그인</button>
       </form>
       <div>
-        <form method="POST" action="{% url 'ac:signup_view'%}">                          
+        <form method="GET" action="{% url 'ac:signup_view'%}">                          
           {% csrf_token %}
           <button class="btn btn-outline-success" type="submit" style="margin-top: 20px;">회원가입</button>
         </form>
