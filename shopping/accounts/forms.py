@@ -14,6 +14,7 @@ class SignupForm(forms.Form):
 
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(widget=forms.PasswordInput)
     person_name = forms.CharField(label='이름')
     phone_number = forms.CharField(label='전화번호')
     address = forms.CharField(label='주소', widget=forms.TextInput(),)
@@ -49,7 +50,7 @@ class SignupForm(forms.Form):
         return password
         
     def clean_password2(self):
-        password1 = self.cleaned_data.get("password1")
+        password1 = self.cleaned_data.get("password")
         password2 = self.cleaned_data.get("password2")
 
         if password1 and password1 != password2:

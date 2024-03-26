@@ -5,6 +5,10 @@ from accounts.models import User
 from accounts.forms import LoginForm, SignupForm
 from django.urls import reverse
 
+def index_view(request):
+    print("aaa")
+    return render(request, "index.html")
+
 def login_view(request):
 
     return render(request, "login.html")
