@@ -7,7 +7,7 @@ from django.urls import reverse
 
 def index_view(request):
     print("aaa")
-    return render(request, "index.html")
+    return render(request, "indexs.html")
 
 def login_view(request):
 

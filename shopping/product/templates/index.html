@@ -1,11 +1,77 @@
 {% extends 'static/base.html' %}
-<head> </head>
+<head> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
 
 <body>
+    
     {% block content %}
+    <style>
+        .head-co{
+            margin-top:5rem;
+        }
+        .table {
+            border-collapse: separate;
+            border-spacing: 20px 20px;
+        }
+        
+        #button-color{
+            background-color:#B3D8FF;
+        }
+        
+        .page-link {
+            color: #000; 
+            background-color: #fff;
+            border: 1px solid #ccc; 
+        }
+        
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #555;
+            font-weight:bold;
+            background-color: #f1f1f1;
+            border-color: #ccc;
+        }
+        
+        .page-link:focus, .page-link:hover {
+            color: #000;
+            background-color: #fafafa; 
+            border-color: #ccc;
+        }
+        
+        .td-primary{
+            width:11%;
+            text-align:center;
+        }
+        
+        .pagination {
+            z-index: 1000; /* 페이지네이션의 z-index 값을 낮게 조절 */
+        }
+        
+        /* 모달 스타일 조절 */
+        #myModal {
+            z-index: 10001; /* 모달의 z-index 값을 높게 조절 */
+        }
+        
+        #con-mar {
+            margin-top:20px;
+        
+        }
+        .submit-button {
+            border-radius:20px;
+            padding: 10px 30px;
+            font-size: 1.0em;
+            background-color:#ffffff;
+            border: 1px solid #719FD6;
+        }
+    </style>
+    <div class ="head-co">
+        <div class="container">
+            <div class="mt-20">
     <table>
         <thead>
-            <tr>
+            
+            <tr class="tables">
                 <td class="td-primary">번호</td>
                 <td>제목</td>
             </tr>
@@ -13,7 +79,7 @@
         <tbody>
             {% if data %} 
                 {% for item in data %}
-                    <tr>
+                    <tr class="tables">
                         <!-- 글번호 = (전제글수) - (시작인덱스) - (현재인덱스) + 1 -->
                         <td class="td-primary">{{ item.pk }}</td>
                         <td>
@@ -25,7 +91,7 @@
                 {% endfor %} 
             {% else %} 
                 {% for product in products %}
-                    <tr>
+                    <tr class="tables">
                         <td class="td-primary">{{ product.pk }}</td>
                         <td>
                             <a href="{% url 'pr:detail' product.urls %}">{{ product.product_name }}</a>
@@ -35,5 +101,8 @@
             {% endif %}
         </tbody>
     </table>
+</div>
+</div>
+</div>
     {% endblock %}
 </body>
