@@ -12,7 +12,7 @@
         }
         .table {
             border-collapse: separate;
-            border-spacing: 20px 20px;
+            border-spacing: 40px 20px;
         }
         
         #button-color{
@@ -64,45 +64,66 @@
             background-color:#ffffff;
             border: 1px solid #719FD6;
         }
+        .td-name-center{
+            text-align:center;
+            
+        }
+        .td-name{
+            padding-left : 5%;
+            padding-top : 10px;
+            padding-bottom : 8px;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .thead-top{
+            border-bottom : 1px solid black;
+        }
+        td {
+            font-size: 20px;
+        }
+        .tb-80{
+            width : 100%;
+        }
     </style>
     <div class ="head-co">
         <div class="container">
             <div class="mt-20">
-    <table>
-        <thead>
-            
-            <tr class="tables">
-                <td class="td-primary">번호</td>
-                <td>제목</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% if data %} 
-                {% for item in data %}
-                    <tr class="tables">
-                        <!-- 글번호 = (전제글수) - (시작인덱스) - (현재인덱스) + 1 -->
-                        <td class="td-primary">{{ item.pk }}</td>
-                        <td>
-                            <a href="{% url 'pr:detail' item.urls %}"
-                                >{{ item.product_name }}</a
-                            >
-                        </td>
-                    </tr>
-                {% endfor %} 
-            {% else %} 
-                {% for product in products %}
-                    <tr class="tables">
-                        <td class="td-primary">{{ product.pk }}</td>
-                        <td>
-                            <a href="{% url 'pr:detail' product.urls %}">{{ product.product_name }}</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            {% endif %}
-        </tbody>
-    </table>
-</div>
-</div>
-</div>
+                <table class='tb-80'>
+                    <thead class='thead-top'>
+                        <tr class="tables">
+                            <td class="td-primary">번호</td>
+                            <td class='td-name-center'>제목</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if data %} 
+                            {% for item in data %}
+                                <tr class="tables">
+                                    <!-- 글번호 = (전제글수) - (시작인덱스) - (현재인덱스) + 1 -->
+                                    <td class="td-primary">{{ item.pk }}</td>
+                                    <td class='td-name'>
+                                        <a href="{% url 'pr:detail' item.urls %}"
+                                            >{{ item.product_name }}</a
+                                        >
+                                    </td>
+                                </tr>
+                            {% endfor %} 
+                        {% else %} 
+                            {% for product in products %}
+                                <tr class="tables">
+                                    <td class="td-primary">{{ product.pk }}</td>
+                                    <td class='td-name'>
+                                        <a href="{% url 'pr:detail' product.urls %}">{{ product.product_name }}</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     {% endblock %}
 </body>

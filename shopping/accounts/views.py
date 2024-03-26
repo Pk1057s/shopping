@@ -16,7 +16,6 @@ def login_view(request):
 def login_submit(request):
     if request.method == "POST":
         form = LoginForm(data=request.POST)
-        print(form)
         username = form.cleaned_data["username"]
         password = form.cleaned_data["password"]
         # print(username)
@@ -27,9 +26,10 @@ def login_submit(request):
         
         # 사용자가 존재하면 로그인 후 메인페이지로 이동
         if is_auth:
+            print('run')
             login(request, is_auth)
-            message = "success" + info
-            return render(request, "login.html", {'message':message})
+            print('success')
+            return render(request, "indexs.html")
         # 없으면 로그인 실패 문구 출력
         else:
             message = "fail" + info
