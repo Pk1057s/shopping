@@ -7,7 +7,7 @@ from accounts.models import User
 class LoginForm(forms.Form):
     username = forms.CharField(min_length=1, label='아이디', widget=forms.TextInput(),)
     password = forms.CharField(min_length=1, label='비밀번호', widget=forms.PasswordInput(),)
-    role = forms.ChoiceField(choices=User.ROLES, widget=forms.RadioSelect())
+    role = forms.ChoiceField(choices=User.ROLES, widget=forms.RadioSelect(), required=False)
     
 # 회원가입
 class SignupForm(forms.Form):   
