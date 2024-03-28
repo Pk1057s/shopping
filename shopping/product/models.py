@@ -2,12 +2,13 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.text import slugify
+from accounts import models as m
 import hashlib
 
 class Tag(models.Model):
-    person_name = models.CharField(max_length=100)
+    user = models.ForeignKey(m.User, on_delete=models.CASCADE)
     tag = models.CharField(max_length=100)
-    genre = models.CharField(max_length=100)
+    create_at = models.CharField(max_length=1000)
     def __str__(self):
         return self.person_name
  

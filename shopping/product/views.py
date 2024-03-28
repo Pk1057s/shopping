@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from .models import Tag, Product
 from accounts.models import User
 from django.db.models import Q
-
+from modeling import search_modeling as models
 
 def index(request):
     data = Product.objects.all()
@@ -51,6 +51,8 @@ def search_results(request):
             Q(tag__icontains=search) |
             Q(genre__icontains=search)
         ).distinct()
+        if products:
+            models.search_results(products)
         return render(request, 'index.html', {'products': products, 'query': search})
     else:
         return render(request, 'index.html')
@@ -59,3 +61,12 @@ def search_results(request):
 def detail_view(request, urls):
     data = Product.objects.get(urls=urls)
     return render(request, 'detail.html', {'data': data})
+
+
+from datetime import datetime
+import pytz
+
+def user_tag(req,res):
+    if Tag.objects.filter(user_id = res).exists():
+        tag = Tag.objects.filter(user_id = req) 
+        Tag.objects.create(tag = req, user_id = res, create_at = datetime.now(pytz.timezone('Asia/Seoul')))

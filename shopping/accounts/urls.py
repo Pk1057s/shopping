@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from accounts import views
+from modeling import views as model_views
 
 app_name='ac'
 urlpatterns = [
@@ -10,4 +11,6 @@ urlpatterns = [
     path('signup/', views.signup_view, name='signup_view'),
     path('signup_submit/', views.signup_submit, name='signup_submit'),
     path('serach/', views.login_view, name='search'),
+    
+    
 ]

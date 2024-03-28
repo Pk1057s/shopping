@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
+     
     ROLES = (
         ('admin', '관리자'),
         ('seller', '판매자'),
