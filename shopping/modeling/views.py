@@ -3,7 +3,7 @@ from product.models import SearchData
 from datetime import datetime, timedelta
 from django.db.models import Count
 
-def extract(res, req):
+def extract(req):
     search_days = 30
     top = 5
 
@@ -31,5 +31,5 @@ def extract(res, req):
     # 추천모델
         
 def render_extracted_tag(req):
-    extracted_tag = extract(req)
+    extracted_tag = extract(req.session.get('user_id'))
     return render(req, "index.html", {"extracted_tag":extracted_tag})
