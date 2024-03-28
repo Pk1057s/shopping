@@ -4,6 +4,6 @@ from . import views
 
 app_name='md'
 urlpatterns = [
-    path('', views.index_view, name='index_view'), 
+    path('', views.render_extracted_tag, name='render_extracted_tag'), 
     
 ]
