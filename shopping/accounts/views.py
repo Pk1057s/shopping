@@ -6,12 +6,16 @@ from accounts.forms import LoginForm, SignupForm
 from django.urls import reverse
 
 def index_view(request):
-    print("aaa")
     return render(request, "indexs.html")
 
 def login_view(request):
-
     return render(request, "login.html")
+
+def logout_view(request):
+    logout(request)
+    request.session.flush()
+    return render(request, "indexs.html")
+
 
 def login_submit(request):
     if request.method == "POST":
@@ -24,19 +28,17 @@ def login_submit(request):
             info =f", {username}, {password}"
             # 해당하는 사용자가 있는지 확인
             is_auth = authenticate(username=username, password=password)
-            print('11111111111111111111111111111')
+           
             # 사용자가 존재하면 로그인 후 메인페이지로 이동
             if is_auth:
-                print('22222222222222222222222222222222')
                 login(request, is_auth)
-                return render(request, "indexs.html")
+                request.session['user_id'] = is_auth.username 
+                return reverse('ac:index_view')
             # 없으면 로그인 실패 문구 출력
             else:
-                print('3333333333333333333333333333333')
                 message = "fail" + info
                 return render(request, 'login.html', {'message':message})
         else:
-            print('4444444444444444444444444444')
             print(form)
             return render(request, "indexs.html")
 
