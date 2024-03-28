@@ -1,8 +1,9 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import Tag, Product
+from django.urls import reverse
+from .models import SearchData, Product
 from accounts.models import User
 from django.db.models import Q
-from modeling import search_modeling as models
+
 
 def index(request):
     data = Product.objects.all()
@@ -20,7 +21,7 @@ def person_tag(request):
         genre = request.POST.get('genre')
         print(person_name, tag, genre)
         if person_name and tag and genre:
-            new_tag = Tag.objects.create(
+            new_tag = SearchData.objects.create(
                 person_name=person_name, tag=tag, genre=genre)
             # new_tag.save()
         return render(request, 'index.html')
@@ -37,7 +38,7 @@ def pr_tag(request):
             new_tag = Product.objects.create(
                 product_name=product_name, price=price, discount=discount, tag=tag, genre=genre)
             # new_tag.save()
-        return render(request, 'index.html')
+        return redirect(reverse('pr:index'))
     else:
         return render(request, 'index.html')
 
@@ -52,21 +53,20 @@ def search_results(request):
             Q(genre__icontains=search)
         ).distinct()
         if products:
-            models.search_results(products)
-        return render(request, 'index.html', {'products': products, 'query': search})
+            return render(request, 'index.html', {'products': products, 'query': search})
+        else: 
+            render(request, 'index.html')
     else:
         return render(request, 'index.html')
 
 
 def detail_view(request, urls):
     data = Product.objects.get(urls=urls)
+    username = request.session.get('user_id')
+    if User.objects.filter(username = username).exists():
+        SearchData.objects.create(tag = data.tag, genre = data.genre ,username = username, create_at = datetime.now(pytz.timezone('Asia/Seoul')))
     return render(request, 'detail.html', {'data': data})
 
 
 from datetime import datetime
 import pytz
-
-def user_tag(req,res):
-    if Tag.objects.filter(user_id = res).exists():
-        tag = Tag.objects.filter(user_id = req) 
-        Tag.objects.create(tag = req, user_id = res, create_at = datetime.now(pytz.timezone('Asia/Seoul')))

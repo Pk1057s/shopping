@@ -33,7 +33,7 @@ def login_submit(request):
             if is_auth:
                 login(request, is_auth)
                 request.session['user_id'] = is_auth.username 
-                return render(request, "indexs.html")
+                return reverse('ac:index_view')
             # 없으면 로그인 실패 문구 출력
             else:
                 message = "fail" + info
