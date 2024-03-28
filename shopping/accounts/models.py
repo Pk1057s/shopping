@@ -14,5 +14,6 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=15, blank=False, null=True, verbose_name='전화번호')
     address = models.CharField(max_length=100, blank=False, null=True, verbose_name='주소')
 
+
     class Meta:
         db_table = 'users'
